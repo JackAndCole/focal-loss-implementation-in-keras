@@ -1,6 +1,6 @@
 # Focal Loss
 
-This is the keras implementation of focal loss proposed by Lin et. al. in their Focal Loss for Dense Object Detection paper.
+This is the keras implementation of focal loss proposed by Lin et. al. in their [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002) paper.
 
 ![focal loss](image/focal_loss.png)
 

@@ -16,7 +16,7 @@ Categorical
 
 `model.compile(loss=[categorical_focal_loss(gamma=2)], metrics=["accuracy"], optimizer="adam")`
 
-Alpha setting:
+alpha setting:
 
 `model.fit(class_weight={0:alpha0, 1:alpha1, ...}, ...)` the class_weight is the alpha of focal loss.
 

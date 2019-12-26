@@ -21,8 +21,8 @@ def binary_focal_loss(gamma=2):
         y_pred = K.constant(y_pred) if not K.is_tensor(y_pred) else y_pred
         y_true = K.cast(y_true, y_pred.dtype)
 
-        return -y_true * K.pow(1 - y_pred, gamma) * K.log((y_pred + K.epsilon())) - \
-               (1 - y_true) * K.pow(y_pred, gamma) * K.log((1 - y_pred + K.epsilon()))
+        return K.sum(-y_true * K.pow(1 - y_pred, gamma) * K.log((y_pred + K.epsilon())) -
+                     (1 - y_true) * K.pow(y_pred, gamma) * K.log((1 - y_pred + K.epsilon())), axis=-1)
 
     return focal_loss
 
@@ -47,7 +47,7 @@ def categorical_focal_loss(gamma=2):
         y_pred = K.constant(y_pred) if not K.is_tensor(y_pred) else y_pred
         y_true = K.cast(y_true, y_pred.dtype)
 
-        return K.max(
+        return K.sum(
             -y_true * K.pow(1 - y_pred, gamma) * K.log(y_pred + K.epsilon()), axis=-1)
 
     return focal_loss
@@ -59,8 +59,8 @@ if __name__ == "__main__":
     tf.enable_eager_execution()
 
     # binary focal loss test
-    y_true1 = [0, 1, 0, 1]
-    y_pred1 = [0.2, 0.6, 0.4, 0.7]
+    y_true1 = [[0], [1], [0], [1]]
+    y_pred1 = [[0.2], [0.6], [0.4], [0.7]]
     print(binary_focal_loss()(y_true1, y_pred1))
 
     # categorical focal loss test
